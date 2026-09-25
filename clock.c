@@ -5,18 +5,6 @@
 
 #define GAP 2
 
-// Definir el color de los numeros
-
-static void setup_colors(void){
-    if (!has_colors()) return;
-
-    start_color();
-    use_default_colors();
-
-    short fg = COLOR_CYAN;
-    init_pair(1, fg, -1);
-}
-
 // Definir el tamaño de los numeros
 
 static int glyph_width(int g){
@@ -34,14 +22,43 @@ static int draw_glyph(int y, int x, int g){
 
 // Funcion principal
 
-int main(void){
+int main(int argc, char *argv[]){
     initscr();
     cbreak();
     noecho();
     curs_set(0);
     keypad(stdscr, TRUE);
     timeout(200);
-    setup_colors();
+
+    if (has_colors()){
+
+        start_color();
+        use_default_colors();
+
+        short fg = COLOR_WHITE;
+
+        if (argc == 3 && strcmp(argv[1],"-c") == 0){
+
+            if (strcmp(argv[2],"red") == 0){
+                fg = COLOR_RED;
+            } else if (strcmp(argv[2], "green") == 0){
+                fg = COLOR_GREEN;
+            } else if (strcmp(argv[2], "yellow") == 0){
+                fg = COLOR_YELLOW;
+            } else if (strcmp(argv[2], "blue") == 0){
+                fg = COLOR_BLUE;
+            } else if (strcmp(argv[2], "magenta") == 0){
+                fg = COLOR_MAGENTA;
+            } else if (strcmp(argv[2],"cyan") == 0){
+                fg = COLOR_CYAN;
+            } else if (strcmp(argv[2], "black") == 0){
+                fg = COLOR_BLACK;
+            }
+
+        }
+
+        init_pair(1, fg, -1);
+    }
 
     int active = 1;
 
