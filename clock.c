@@ -30,6 +30,8 @@ int main(int argc, char *argv[]){
     keypad(stdscr, TRUE);
     timeout(200);
 
+    // Definir el color de los numeros
+
     if (has_colors()){
 
         start_color();
@@ -62,7 +64,7 @@ int main(int argc, char *argv[]){
 
     int active = 1;
 
-    // Bucle Principal
+    // Bucle principal
 
     while (active){
         time_t now = time(NULL);
